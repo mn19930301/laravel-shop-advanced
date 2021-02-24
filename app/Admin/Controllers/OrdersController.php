@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\Order;
 use Encore\Admin\Grid;
 use Illuminate\Http\Request;
+use App\Services\OrderService;
 use Encore\Admin\Layout\Content;
 use App\Models\CrowdfundingProduct;
 use App\Exceptions\InternalException;
@@ -97,7 +98,7 @@ class OrdersController extends AdminController
         return redirect()->back();
     }
 
-    public function handleRefund(Order $order, HandleRefundRequest $request)
+    public function handleRefund(Order $order, HandleRefundRequest $request, OrderService $orderService)
     {
         // 判断订单状态是否正确
         if ($order->refund_status !== Order::REFUND_STATUS_APPLIED) {
@@ -112,7 +113,7 @@ class OrdersController extends AdminController
                 'extra' => $extra,
             ]);
             // 调用退款逻辑
-            $this->_refundOrder($order);
+            $orderService->refundOrder($order);
         } else {
             // 将拒绝退款理由放到订单的 extra 字段中
             $extra = $order->extra ?: [];
@@ -127,6 +128,7 @@ class OrdersController extends AdminController
         return $order;
     }
 
+    //---------此方法为说明,方便了解，不用该方法，用app/services/orderserver.php------
     protected function _refundOrder(Order $order)
     {
         // 判断该订单的支付方式
