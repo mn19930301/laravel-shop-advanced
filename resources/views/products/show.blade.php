@@ -11,7 +11,7 @@
                         <img class="cover" src="{{ $product->image_url }}" alt="">
                     </div>
                     <div class="col-7">
-                        <div class="title">{{ $product->title }}</div>
+                        <div class="title">{{ $product->long_title ?: $product->title }}</div>
                         <!-- 众筹商品模块开始 -->
                         @if($product->type === \App\Models\Product::TYPE_CROWDFUNDING)
                         <div class="crowdfunding-info">
@@ -104,7 +104,7 @@
                                 <div class="properties-list-title">产品参数：</div>
                                 <ul class="properties-list-body">
                                     @foreach($product->grouped_properties as $name => $values)
-                                        <li>{{ $name }}：{{ join(' ', $values) }}</li>
+                                    <li>{{ $name }}：{{ join(' ', $values) }}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -231,7 +231,7 @@
                 return;
             }
             // 把用户的收货地址以 JSON 的形式放入页面，赋值给 addresses 变量
-            var addresses = @json(Auth::check() ? Auth::user() -> addresses : []);
+            var addresses = @json(Auth::check() ? Auth::user()->addresses : []);
             // 使用 jQuery 动态创建一个表单
             var $form = $('<form></form>');
             // 表单中添加一个收货地址的下拉框
