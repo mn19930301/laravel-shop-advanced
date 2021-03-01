@@ -58,16 +58,10 @@ abstract class CommonProductsController extends AdminController
         $this->customForm($form);
 
         $form->hasMany('skus', '商品 SKU', function (Form\NestedForm $form) {
-            $form->text('title',
-                'SKU 名称'
-            )->rules('required');
+            $form->text('title','SKU 名称')->rules('required');
             $form->text('description', 'SKU 描述')->rules('required');
-            $form->text('price',
-                '单价'
-            )->rules('required|numeric|min:0.01');
-            $form->text('stock',
-                '剩余库存'
-            )->rules('required|integer|min:0');
+            $form->text('price','单价')->rules('required|numeric|min:0.01');
+            $form->text('stock','剩余库存')->rules('required|integer|min:0');
         });
         $form->saving(function (Form $form) {
             $form->model()->price = collect($form->input('skus'))->where(Form::REMOVE_FLAG_NAME, 0)->min('price') ?: 0;

@@ -99,7 +99,20 @@
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="product-detail-tab">
-                            {!! $product->description !!}
+                            <!-- 产品属性开始 -->
+                            <div class="properties-list">
+                                <div class="properties-list-title">产品参数：</div>
+                                <ul class="properties-list-body">
+                                    @foreach($product->grouped_properties as $name => $values)
+                                        <li>{{ $name }}：{{ join(' ', $values) }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!-- 产品属性结束 -->
+                            <!-- 在商品描述外面包了一层 div -->
+                            <div class="product-description">
+                                {!! $product->description !!}
+                            </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="product-reviews-tab">
                             <!-- 评论列表开始 -->
@@ -218,7 +231,7 @@
                 return;
             }
             // 把用户的收货地址以 JSON 的形式放入页面，赋值给 addresses 变量
-            var addresses = @json(Auth::check() ? Auth::user()-> addresses : []);
+            var addresses = @json(Auth::check() ? Auth::user() -> addresses : []);
             // 使用 jQuery 动态创建一个表单
             var $form = $('<form></form>');
             // 表单中添加一个收货地址的下拉框
