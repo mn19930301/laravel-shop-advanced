@@ -98,9 +98,7 @@
 
 @section('scriptsAfterJs')
 <script>
-    var filters = {
-        !!json_encode($filters) !!
-    };
+    var filters = @json($filters);
     $(document).ready(function() {
         $('.search-form input[name=search]').val(filters.search);
         $('.search-form select[name=order]').val(filters.order);
