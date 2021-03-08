@@ -73,6 +73,12 @@ class Product extends Model
             });
     }
 
+    //局部模型作用域
+    public function scopeByIds($query, $ids)
+    {
+        return $query->whereIn('id', $ids)->orderByRaw(sprintf("FIND_IN_SET(id, '%s')", join(',', $ids)));
+    }
+
     public function toESArray()
     {
         // 只取出需要的字段
