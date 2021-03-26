@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 use App\Models\CrowdfundingProduct;
 use App\Jobs\RefundCrowdfundingOrders;
 
-class FinishCrowdfunding extends Command
+class FinishCrowdfunding1 extends Command
 {
     protected $signature = 'cron:finish-crowdfunding';
 
