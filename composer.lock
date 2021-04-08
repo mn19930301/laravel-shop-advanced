@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f16bfec4108671dbbef8728459f0ea9",
+    "content-hash": "f297996e8869da61c59dfad635380f95",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1913,7 +1913,13 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/horizon/zipball/b3fba0daaaaf5e84197b06dd25f3b27bb7301171",
                 "reference": "b3fba0daaaaf5e84197b06dd25f3b27bb7301171",
-                "shasum": ""
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
             },
             "require": {
                 "cakephp/chronos": "^2.0",
