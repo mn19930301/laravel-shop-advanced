@@ -16,6 +16,7 @@ use App\Http\Requests\ApplyRefundRequest;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\CrowdFundingOrderRequest;
 use App\Exceptions\CouponCodeUnavailableException;
+use App\Http\Requests\SeckillOrderRequest;
 
 class OrdersController extends Controller
 {
@@ -113,6 +114,15 @@ class OrdersController extends Controller
         });
 
         return redirect()->back();
+    }
+
+    public function seckill(SeckillOrderRequest $request, OrderService $orderService)
+    {
+        $user    = $request->user();
+        $address = UserAddress::find($request->input('address_id'));
+        $sku     = ProductSku::find($request->input('sku_id'));
+
+        return $orderService->seckill($user, $address, $sku);
     }
 
     public function applyRefund(Order $order, ApplyRefundRequest $request)
