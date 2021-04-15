@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductSku;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redis;
 use App\Exceptions\InvalidRequestException;
 use Illuminate\Auth\AuthenticationException;
 
