@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
 Route::get('products', 'ProductsController@index')->name('products.index');
@@ -67,7 +68,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('installments/alipay/return', 'InstallmentsController@alipayReturn')->name('installments.alipay.return');
     Route::get('installments/{installment}/wechat', 'InstallmentsController@payByWechat')->name('installments.wechat');
     
-    Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
+    
 });
 
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');

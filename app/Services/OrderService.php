@@ -11,6 +11,7 @@ use App\Models\ProductSku;
 use App\Models\UserAddress;
 use App\Jobs\RefundInstallmentOrder;
 use App\Exceptions\InternalException;
+use Illuminate\Support\Facades\Redis;
 use App\Exceptions\InvalidRequestException;
 use App\Exceptions\CouponCodeUnavailableException;
 
@@ -167,6 +168,8 @@ class OrderService
             $item->product()->associate($sku->product_id);
             $item->productSku()->associate($sku);
             $item->save();
+            
+            Redis::decr('seckill_sku_' . $sku->id);
 
             return $order;
         });
